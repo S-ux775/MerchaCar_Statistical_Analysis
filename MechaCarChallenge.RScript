@@ -1,0 +1,21 @@
+# RSciprt
+library (dplyr)
+car_df <- read.csv(file='MechaCar_mpg.csv',check.names=F,stringsAsFactors = F)
+# Design a linear regression model that predicts th mpg using several variales
+
+lm (mpg~vehicle_length,car_df) #linear model
+summary(lm(mpg~vehicle_length,car_df))
+
+lm (mpg~vehicle_weight,car_df)
+summary(lm(mpg~vehicle_weight,car_df))
+
+lm (mpg~spoiler_angle,car_df)
+summary(lm(mpg~spoiler_angle,car_df))
+
+lm (mpg~ground_clearance,car_df)
+summary(lm(mpg~ground_clearance,car_df))
+
+lm(mpg~AWG,car_df)
+summary(lm(mpg~AWD,car_df))
+        
+        
