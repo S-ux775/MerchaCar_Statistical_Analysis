@@ -1,1 +1,1 @@
-# MerchaCar_Statisticall_Anallysis
+# MerchaCar_Statistical_Anallysis
