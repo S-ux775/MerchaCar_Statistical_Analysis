@@ -1,7 +1,13 @@
+# AutosRUs’ MechaCar projecrt
 # RSciprt
 library (dplyr)
+library(tidyverse)
+library(magrittr)
+
 car_df <- read.csv(file='MechaCar_mpg.csv',check.names=F,stringsAsFactors = F)
-# Design a linear regression model that predicts th mpg using several variales
+names (car_df)
+
+# Deliverable 1. Design a linear regression model that predicts th mpg using several variables
 
 lm (mpg~vehicle_length,car_df) #linear model
 summary(lm(mpg~vehicle_length,car_df))
@@ -15,7 +21,56 @@ summary(lm(mpg~spoiler_angle,car_df))
 lm (mpg~ground_clearance,car_df)
 summary(lm(mpg~ground_clearance,car_df))
 
-lm(mpg~AWG,car_df)
+lm(mpg~AWD,car_df)
+
 summary(lm(mpg~AWD,car_df))
-        
-        
+
+# Combine and plot pg vs each variable
+plot(car_df$mpg~car_df$vehicle_length)
+plot(car_df$mpg~car_df$vehicle_weight)
+plot(car_df$mpg~car_df$spoiler_angle)
+plot(car_df$mpg~car_df$ground_clearance)
+plot(car_df$mpg~car_df$AWD)
+
+#calculate correlation coefficients
+used_matrix <- as.matrix(car_df[,c("mpg", "vehicle_length","vehicle_weight", "spoiler_angle","ground_clearance", "AWD")]) #convert data frame into numeric matrix
+cor(used_matrix)
+
+typemodel_mpg<-lm(mpg~vehicle_length+vehicle_weight+spoiler_angle+ground_clearance+AWD, data=car_df)
+summary(typemodel_mpg)
+typemodel_mpg$coefficients
+
+
+
+# Deliverable 2: Create Visualizations for the Trip Analysis (30 points)
+
+psi_df <- read.csv(file='Suspension_coil.csv',check.names=F,stringsAsFactors = F)
+
+# Create total_summary table with mean, median, variance, sd for psi
+#group_by(mean,median,variance, sd)
+#total_summary <- psi_df %>% group_by(PSI)%>% summarize(mean(),median(), variance(), sd()) 
+total_summary <- psi_df %>% summarize(Mean=mean(PSI), Median=median(PSI), Variance=sd(PSI)**2, SD=sd(PSI)) 
+
+
+# Create a lot_summary table that shows psi metrics for each lot
+lot_summary <- psi_df %>% group_by(Manufacturing_Lot) %>% 
+              summarize(Mean=mean(PSI), Median=median(PSI), Variance=sd(PSI)**2, SD=sd(PSI))
+
+
+# Deliverable 3: T-Tests on Suspension Coils (20 points)
+
+# Create t.test to compare all manufacturing lots vs. population mean
+t.test(psi_df$PSI, mu=mean(psi_df$PSI)) #compare sample versus population means
+
+# Create t.test and its subset() argument to determine difference between sample and mean
+#Lot 1
+t.test(subset(psi_df, Manufacturing_Lot == "Lot1")$PSI, mu=1500)
+
+#Lot 2
+t.test(subset(psi_df, Manufacturing_Lot == "Lot2")$PSI, mu=1500)
+
+#Lot 3
+t.test(subset(psi_df, Manufacturing_Lot == "Lot3")$PSI, mu=1500)
+
+## ## August 15
+
