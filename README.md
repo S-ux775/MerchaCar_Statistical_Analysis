@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # MerchaCar_Statisticall_Analysis
 
 ## 1) Linear Regression to Predict MPG,
@@ -93,3 +94,6 @@ Statistical Analysis: Perform an ANOVA T-Test for each category and determine if
 
 
 
+=======
+# MerchaCar_Statistical_Anallysis
+>>>>>>> 5a327a435b4a16df64745e4e7522d20b379b2dae
